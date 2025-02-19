@@ -8157,7 +8157,7 @@ textarea.form-control-lg {
 
 .bg-light {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+  background-color: #FEFEFA !important;
 }
 
 .bg-dark {
@@ -10947,7 +10947,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("../assets/img/banner-mariage-opacity.png");
+  background-image: url("../assets/img/Banner-Fluxo.png");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
