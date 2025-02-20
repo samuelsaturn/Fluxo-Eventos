@@ -339,6 +339,30 @@
                 </ul>
             </div>
         </section>
+
+        <!-- Newsletter  -->
+        <section style="padding: 20px 0px 5px 0px;" class="page-section" id="newsletter">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Newsletter</h2>
+                    <h3 class="section-subheading text-white">Assine agora e fique por dentro das novidades!</h3>
+                </div>
+                <form id="newsletterForm" method="POST">
+                    <div class="row align-items-stretch mb-5">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <input class="form-control" id="email-newsletter" type="text" name="email-newsletter" placeholder="Seu E-mail *" required />
+                            </div>
+                        </div>
+                        <div class="text-center col-md-2">
+                            <button style="background-color: #5CACC4; color: white;" class="btn btn-xl text-uppercase" id="submitButtonNewsletter" type="submit">Enviar</button>
+                        </div>
+                    </div>                  
+                </form>
+            </div>
+        </section>
+
+        
         <!-- Contact-->
         <section class="page-section" id="contact">
             <div class="container">
@@ -645,7 +669,57 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
-        <a href="https://wa.me/" target="_blank" id="whatsapp-button">
+        <script type="module">
+            import { BREVO_API_KEY } from './js/config.js';
+            console.log(BREVO_API_KEY)
+          
+            document.getElementById("newsletterForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Impede o envio tradicional do formulário
+            
+                let emailInput = document.getElementById("email-newsletter");
+                let email = emailInput.value.trim();
+                let submitButton = document.getElementById("submitButtonNewsletter");
+            
+                if (!email) {
+                    alert("Por favor, insira um e-mail válido.");
+                    return;
+                }
+            
+                submitButton.innerText = "Enviando...";
+                submitButton.disabled = true;
+            
+                fetch("https://api.brevo.com/v3/contacts", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "api-key": BREVO_API_KEY
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        listIds: [5]
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.id) {
+                        alert("E-mail cadastrado com sucesso!");
+                        emailInput.value = ""; // Limpa o campo após o envio
+                    } else {
+                        alert("Erro: " + (data.message || "Não foi possível cadastrar."));
+                    }
+                    submitButton.innerText = "Enviar";
+                    submitButton.disabled = false;
+                })
+                .catch(error => {
+                    alert("Erro ao conectar com o Brevo.");
+                    submitButton.innerText = "Enviar";
+                    submitButton.disabled = false;
+                });
+            });
+          </script>
+          
+
+        <a href="https://wa.me/+553134939561" target="_blank" id="whatsapp-button">
             <img src="https://cdn-icons-png.flaticon.com/512/2111/2111728.png" alt="WhatsApp">
         </a>
     </body>

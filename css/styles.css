@@ -11269,17 +11269,22 @@ section#contact {
   background-repeat: no-repeat;
   background-position: center;
 }
-section#contact .section-heading {
+section#newsletter {
+  background-image: url("../assets/img/Banner-Fluxo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+section#contact .section-heading, section#newsletter .section-heading {
   color: #fff;
 }
-section#contact form#contactForm .form-group {
+section#contact form#contactForm .form-group, section#newsletter form#newsletterForm .form-group {
   margin-bottom: 1.5rem;
 }
 section#contact form#contactForm .form-group input,
-section#contact form#contactForm .form-group textarea {
+section#contact form#contactForm .form-group textarea,section#newsletter form#newsletterForm .form-group input {
   padding: 1.25rem;
 }
-section#contact form#contactForm .form-group input.form-control {
+section#contact form#contactForm .form-group input.form-control, section#newsletter form#newsletterForm .form-group input.form-control {
   height: auto;
 }
 section#contact form#contactForm .form-group-textarea {
